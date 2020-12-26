@@ -64,4 +64,15 @@ dependencies {
     //Network
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation("com.squareup.okhttp3:okhttp:4.9.0")
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+
+    //Activity extension, referring with  "by viewModels"
+    implementation "androidx.activity:activity-ktx:1.2.0-beta01"
+
+    //Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
 }

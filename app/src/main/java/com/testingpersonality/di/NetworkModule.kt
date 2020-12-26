@@ -2,7 +2,7 @@ package com.testingpersonality.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.testingpersonality.Config
+import com.testingpersonality.utils.Config
 import com.testingpersonality.data.remote.DataRemoteDataSource
 import com.testingpersonality.network.DataService
 import dagger.Module
