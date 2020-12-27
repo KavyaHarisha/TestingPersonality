@@ -8,13 +8,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.testingpersonality.R
+import com.testingpersonality.utils.OneShot
 import kotlinx.android.synthetic.main.category_item_row_layout.view.*
 
 class SelectCategoryAdapter :
     RecyclerView.Adapter<SelectCategoryAdapter.ViewHolder>() {
     private var categoryList = listOf<String>()
-    private var onClickItem = MutableLiveData<String>()
-    var itemClick: LiveData<String> = onClickItem
+    private var onClickItem = MutableLiveData<OneShot<String>>()
+    var itemClick: LiveData<OneShot<String>> = onClickItem
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context)
@@ -29,7 +30,7 @@ class SelectCategoryAdapter :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.chapterName.text = categoryList[position]
         holder.itemView.setOnClickListener {
-            onClickItem.value = categoryList[position]
+            onClickItem.value = OneShot(categoryList[position])
         }
     }
 

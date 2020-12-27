@@ -3,5 +3,9 @@
     <dimen name="dimens_0dp">0dp</dimen>
     <dimen name="dimens_10dp">10dp</dimen>
     <dimen name="dimens_5dp">5dp</dimen>
+    <dimen name="dimens_15dp">15dp</dimen>
+    <dimen name="txt_size_30sp">30sp</dimen>
+    <dimen name="dimens_40dp">40dp</dimen>
+    <dimen name="txt_size_18sp">18sp</dimen>
     <fraction name="fraction_09">0.9</fraction>
 </resources>

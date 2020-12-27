@@ -1,5 +1,7 @@
 package com.testingpersonality
 
+import com.testingpersonality.data.local.PersonalityData
+import com.testingpersonality.data.local.PersonalityDataDao
 import kotlinx.coroutines.flow.Flow
 import com.testingpersonality.data.local.DataDao
 import com.testingpersonality.data.remote.DataRemoteDataSource
@@ -16,7 +18,8 @@ import javax.inject.Singleton
 @Singleton
 class DataRepository @Inject constructor(
     private val remoteDataSource: DataRemoteDataSource,
-    private val dataDao: DataDao
+    private val dataDao: DataDao,
+    private val personalityDataDao: PersonalityDataDao
 ) {
 
     private var categoryList = listOf<String>()
@@ -37,4 +40,8 @@ class DataRepository @Inject constructor(
     }
 
     fun getCategoryList() = categoryList
+
+    fun savePersonalityData(personalityData: PersonalityData){
+        personalityDataDao.insert(personalityData)
+    }
 }

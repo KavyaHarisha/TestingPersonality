@@ -2,6 +2,7 @@ package com.testingpersonality.di
 
 import android.content.Context
 import androidx.room.Room
+import com.testingpersonality.data.local.PersonalityDataDao
 import com.testingpersonality.data.local.AppDatabase
 import com.testingpersonality.data.local.DataDao
 import dagger.Module
@@ -27,5 +28,10 @@ object DatabaseModule {
     @Provides
     fun provideDataDao(appDatabase: AppDatabase): DataDao {
         return appDatabase.dataDao()
+    }
+
+    @Provides
+    fun providePersonalityDataDao(appDatabase: AppDatabase): PersonalityDataDao {
+        return appDatabase.personalityDataDao()
     }
 }

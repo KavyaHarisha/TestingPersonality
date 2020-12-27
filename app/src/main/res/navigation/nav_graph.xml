@@ -10,5 +10,15 @@
         android:name="com.testingpersonality.ui.CategoryListFragment"
         android:label="Categories"
         tools:layout="@layout/fragment_category_list" >
+        <action
+            android:id="@+id/action_categoryListFragment_to_questionListFragment"
+            app:destination="@id/questionListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/questionListFragment"
+        android:name="com.testingpersonality.ui.QuestionListFragment"
+        android:label="Question"
+        tools:layout="@layout/fragment_question_list" >
     </fragment>
 </navigation>

@@ -10,9 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import com.testingpersonality.R
+import com.testingpersonality.utils.Config.CATEGORY_KEY
 import com.testingpersonality.utils.NetworkUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_category_list.*
@@ -41,6 +44,11 @@ class CategoryListFragment : Fragment() {
             loader.visibility = View.GONE
             adapter.updateCategory(it)
             adapter.notifyDataSetChanged()
+        })
+
+        adapter.itemClick.observe(viewLifecycleOwner, Observer {
+            val bundle = bundleOf(CATEGORY_KEY to it.getContentIfNotHandled())
+            view.findNavController().navigate(R.id.action_categoryListFragment_to_questionListFragment,bundle)
         })
     }
 

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
+import com.testingpersonality.data.local.PersonalityData
 import com.testingpersonality.DataRepository
 import com.testingpersonality.model.Question
 import com.testingpersonality.utils.State
@@ -33,6 +34,12 @@ class ListingViewModel @ViewModelInject constructor(private val dataRepository: 
                 _categoryData.postValue(dataRepository.getCategoryList())
                 _questionData.postValue(it)
             }
+        }
+    }
+
+    fun storeData(data: PersonalityData){
+        viewModelScope.launch(Dispatchers.IO) {
+            dataRepository.savePersonalityData(data)
         }
     }
 

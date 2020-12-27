@@ -8,9 +8,10 @@ import com.testingpersonality.data.QuestionListConverter
 import com.testingpersonality.data.QuestionTypeConverter
 import com.testingpersonality.model.Question
 
-@Database(entities = [Question::class], version = 1)
+@Database(entities = [Question::class, PersonalityData::class], version = 1)
 @TypeConverters(OptionConverter::class, QuestionListConverter::class,
                 QuestionTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun dataDao(): DataDao
+    abstract fun personalityDataDao(): PersonalityDataDao
 }
