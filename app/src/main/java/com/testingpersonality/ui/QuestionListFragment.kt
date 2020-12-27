@@ -22,6 +22,7 @@ import com.testingpersonality.utils.State
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_question_list.*
 import kotlinx.android.synthetic.main.fragment_question_list.view.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
@@ -59,17 +60,19 @@ class QuestionListFragment : Fragment() {
     private fun inputEditTextChangeListener() {
         condition_edit.condition_edit_text.doAfterTextChanged { charSequence ->
             val data = if (charSequence.toString().isEmpty()) 0 else charSequence.toString().toInt()
-            val range = currentQuestion.question_type.condition!!.if_positive.question_type.range
-            if (data > range.from && data <= range.to) {
-                personalityData = PersonalityData(
-                    currentQuestion.question_type.condition!!.if_positive.question,
-                    charSequence.toString()
-                )
-                viewModel.storeData(personalityData)
-                nextButton.isEnabled = true
-                condition_edit.error = null
-            } else {
-                condition_edit.error = getString(R.string.input_edit_error, range.from, range.to)
+            if (this::currentQuestion.isInitialized){
+                val range = currentQuestion.question_type.condition!!.if_positive.question_type.range
+                if (data > range.from && data <= range.to) {
+                    personalityData = PersonalityData(
+                        currentQuestion.question_type.condition!!.if_positive.question,
+                        charSequence.toString()
+                    )
+                    viewModel.storeData(personalityData,Dispatchers.IO)
+                    nextButton.isEnabled = true
+                    condition_edit.error = null
+                } else {
+                    condition_edit.error = getString(R.string.input_edit_error, range.from, range.to)
+                }
             }
         }
     }
@@ -82,7 +85,7 @@ class QuestionListFragment : Fragment() {
             checkConditionEnableOrNOT(selectedOptions)
             personalityData =
                 PersonalityData(currentQuestion.question, selectedOptions.text.toString())
-            viewModel.storeData(personalityData)
+            viewModel.storeData(personalityData, Dispatchers.IO)
         }
     }
 

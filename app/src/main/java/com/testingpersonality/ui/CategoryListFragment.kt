@@ -19,6 +19,7 @@ import com.testingpersonality.utils.Config.CATEGORY_KEY
 import com.testingpersonality.utils.NetworkUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_category_list.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -71,7 +72,7 @@ class CategoryListFragment : Fragment() {
                         }
                     } else {
                         loader.visibility = View.VISIBLE
-                        viewModel.fetchQuestionsData()
+                        viewModel.fetchQuestionsData(Dispatchers.IO)
                         textViewNetworkStatus.text = getString(R.string.text_connectivity)
                         networkStatusLayout.apply {
                             setBackgroundColor(

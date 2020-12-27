@@ -25,11 +25,11 @@ class ListingViewModel @ViewModelInject constructor(private val dataRepository: 
         get() = _categoryData
 
     init {
-        fetchQuestionsData()
+        fetchQuestionsData(Dispatchers.IO)
     }
 
-    fun fetchQuestionsData() {
-        viewModelScope.launch(Dispatchers.IO) {
+    fun fetchQuestionsData(dispatcher: CoroutineDispatcher) {
+        viewModelScope.launch(dispatcher) {
             dataRepository.getAllCategoriesAndQuestions().collect {
                 _categoryData.postValue(dataRepository.getCategoryList())
                 _questionData.postValue(it)
@@ -37,8 +37,11 @@ class ListingViewModel @ViewModelInject constructor(private val dataRepository: 
         }
     }
 
-    fun storeData(data: PersonalityData){
-        viewModelScope.launch(Dispatchers.IO) {
+    fun storeData(
+        data: PersonalityData,
+        dispatcher: CoroutineDispatcher
+    ){
+        viewModelScope.launch(dispatcher) {
             dataRepository.savePersonalityData(data)
         }
     }
@@ -46,8 +49,8 @@ class ListingViewModel @ViewModelInject constructor(private val dataRepository: 
     private var _personalityData = MutableLiveData<List<PersonalityData>>()
     var personalityInfo:LiveData<List<PersonalityData>> = _personalityData
 
-    fun getData(){
-        viewModelScope.launch(Dispatchers.IO) {
+    fun getData(dispatcher: CoroutineDispatcher){
+        viewModelScope.launch(dispatcher) {
             val list: List<PersonalityData> = dataRepository.getPersonalityData()
             _personalityData.postValue(list)
         }

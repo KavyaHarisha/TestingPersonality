@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.testingpersonality.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_review_question_and_answers.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
@@ -31,7 +32,7 @@ class ReviewQuestionAndAnswersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         reviewRecyclerView.adapter = savedAnswerAdapter
-        viewModel.getData()
+        viewModel.getData(Dispatchers.IO)
         viewModel.personalityInfo.observe(viewLifecycleOwner, Observer {
             savedAnswerAdapter.updateCategory(it)
             savedAnswerAdapter.notifyDataSetChanged()
