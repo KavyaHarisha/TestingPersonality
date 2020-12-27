@@ -4,4 +4,6 @@
     <string name="text_connectivity">Back Online</string>
     <string name="btn_txt_next">Next</string>
     <string name="input_edit_error">The selection must be in %d to %d</string>
+    <string name="txt_submit_answers">Submit Answers</string>
+    <string name="question_answer_txt">%d ) %s \n selected option:- %s</string>
 </resources>

@@ -44,4 +44,6 @@ class DataRepository @Inject constructor(
     fun savePersonalityData(personalityData: PersonalityData){
         personalityDataDao.insert(personalityData)
     }
+
+    fun getPersonalityData() = personalityDataDao.getPersonalityData()
 }

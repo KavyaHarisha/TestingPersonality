@@ -43,4 +43,13 @@ class ListingViewModel @ViewModelInject constructor(private val dataRepository: 
         }
     }
 
+    private var _personalityData = MutableLiveData<List<PersonalityData>>()
+    var personalityInfo:LiveData<List<PersonalityData>> = _personalityData
+
+    fun getData(){
+        viewModelScope.launch(Dispatchers.IO) {
+            val list: List<PersonalityData> = dataRepository.getPersonalityData()
+            _personalityData.postValue(list)
+        }
+    }
 }

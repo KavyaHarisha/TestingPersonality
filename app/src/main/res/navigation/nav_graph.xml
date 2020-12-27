@@ -20,5 +20,22 @@
         android:name="com.testingpersonality.ui.QuestionListFragment"
         android:label="Question"
         tools:layout="@layout/fragment_question_list" >
+        <action
+            android:id="@+id/action_questionListFragment_to_reviewQuestionAndAnswersFragment"
+            app:destination="@id/reviewQuestionAndAnswersFragment"
+            app:popUpTo="@+id/categoryListFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reviewQuestionAndAnswersFragment"
+        android:name="com.testingpersonality.ui.ReviewQuestionAndAnswersFragment"
+        android:label="Review"
+        tools:layout="@layout/fragment_review_question_and_answers" >
+        <action
+            android:id="@+id/action_reviewQuestionAndAnswersFragment_to_categoryListFragment"
+            app:destination="@+id/categoryListFragment"
+            app:popUpTo="@+id/reviewQuestionAndAnswersFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

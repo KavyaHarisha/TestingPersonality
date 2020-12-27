@@ -13,8 +13,9 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.testingpersonality.data.local.PersonalityData
+import androidx.navigation.findNavController
 import com.testingpersonality.R
+import com.testingpersonality.data.local.PersonalityData
 import com.testingpersonality.model.Question
 import com.testingpersonality.utils.Config.CATEGORY_KEY
 import com.testingpersonality.utils.State
@@ -95,6 +96,9 @@ class QuestionListFragment : Fragment() {
                 if (questionIndex < numQuestions) {
                     setQuestion()
                     view.invalidate()
+                } else {
+                    view.findNavController()
+                        .navigate(R.id.action_questionListFragment_to_reviewQuestionAndAnswersFragment)
                 }
             }
         }
@@ -109,7 +113,7 @@ class QuestionListFragment : Fragment() {
                 is State.Success -> {
                     questionList =
                         state.data.filter { it.category == arguments?.getString(CATEGORY_KEY) }
-                    setQuestion()
+                    if(questionList.isNotEmpty()) setQuestion()
                 }
                 is State.Error -> {
                     Toast.makeText(activity, state.message, Toast.LENGTH_LONG).show()

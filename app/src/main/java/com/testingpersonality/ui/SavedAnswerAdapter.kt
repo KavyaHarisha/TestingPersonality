@@ -4,18 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.testingpersonality.R
-import com.testingpersonality.utils.OneShot
+import com.testingpersonality.data.local.PersonalityData
 import kotlinx.android.synthetic.main.category_item_row_layout.view.*
 
-class SelectCategoryAdapter :
-    RecyclerView.Adapter<SelectCategoryAdapter.ViewHolder>() {
-    private var categoryList = listOf<String>()
-    private var onClickItem = MutableLiveData<String>()
-    var itemClick: LiveData<String> = onClickItem
+class SavedAnswerAdapter :
+    RecyclerView.Adapter<SavedAnswerAdapter.ViewHolder>() {
+    private var savedList = listOf<PersonalityData>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context)
@@ -24,21 +20,19 @@ class SelectCategoryAdapter :
     }
 
     override fun getItemCount(): Int {
-        return categoryList.size
+        return savedList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.chapterName.text = categoryList[position]
-        holder.itemView.setOnClickListener {
-            onClickItem.value = categoryList[position]
-        }
+        holder.itemText.text = holder.itemView.context.getString(R.string.question_answer_txt,
+            position+1,savedList[position].question,savedList[position].option)
     }
 
-    fun updateCategory(categoryItems: List<String>){
-        categoryList = categoryItems
+    fun updateCategory(dataItems: List<PersonalityData>){
+        savedList = dataItems
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val chapterName: TextView = view.category_title
+        val itemText: TextView = view.category_title
     }
 }

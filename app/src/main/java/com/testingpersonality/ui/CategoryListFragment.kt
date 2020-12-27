@@ -47,7 +47,7 @@ class CategoryListFragment : Fragment() {
         })
 
         adapter.itemClick.observe(viewLifecycleOwner, Observer {
-            val bundle = bundleOf(CATEGORY_KEY to it.getContentIfNotHandled())
+            val bundle = bundleOf(CATEGORY_KEY to it)
             view.findNavController().navigate(R.id.action_categoryListFragment_to_questionListFragment,bundle)
         })
     }
